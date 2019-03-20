@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FundingRaised",
+            "request": "launch",
+            "mainClass": "com.checkr.interviews.FundingRaised",
+            "projectName": "funding-raised"
+        }
+    ]
+}
