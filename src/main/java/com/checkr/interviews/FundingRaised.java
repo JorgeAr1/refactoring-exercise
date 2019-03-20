@@ -10,7 +10,6 @@ public class FundingRaised {
         List<String[]> csvData = new ArrayList<String[]>();
         CSVReader reader = new CSVReader(new FileReader("startup_funding.csv"));
         String[] row = null;
-
         while((row = reader.readNext()) != null) {
             csvData.add(row);
         }
