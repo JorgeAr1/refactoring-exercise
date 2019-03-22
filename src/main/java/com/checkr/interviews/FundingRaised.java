@@ -117,16 +117,9 @@ public class FundingRaised {
     }
 
     private static void extracted(List<String[]> csvData, Map<String, String> mapped, int i) {
-        mapped.put(stringKeys[0], csvData.get(i)[0]);
-        mapped.put(stringKeys[1], csvData.get(i)[1]);
-        mapped.put(stringKeys[2], csvData.get(i)[2]);
-        mapped.put(stringKeys[3], csvData.get(i)[3]);
-        mapped.put(stringKeys[4], csvData.get(i)[4]);
-        mapped.put(stringKeys[5], csvData.get(i)[5]);
-        mapped.put(stringKeys[6], csvData.get(i)[6]);
-        mapped.put(stringKeys[7], csvData.get(i)[7]);
-        mapped.put(stringKeys[8], csvData.get(i)[8]);
-        mapped.put(stringKeys[9], csvData.get(i)[9]);
+        for(int t=0 ; t<10 ; t++){
+            mapped.put(stringKeys[t], csvData.get(i)[t]);
+        }
     }
 
     public static void main(String[] args) {
