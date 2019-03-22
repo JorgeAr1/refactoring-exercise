@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FundingRaised {
+
+    static String stringKeys[]= {"","company_name","","","city","state","","","","round"};
+
     public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
         List<String[]> csvData = new ArrayList<String[]>();
         CSVReader reader = new CSVReader(new FileReader("startup_funding.csv"));
@@ -20,55 +23,45 @@ public class FundingRaised {
         if(options.containsKey("company_name")) {
             List<String[]> results = new ArrayList<String[]> ();
 
-            for(int i = 0; i < csvData.size(); i++) {
-                if(csvData.get(i)[1].equals(options.get("company_name"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = extracted2(options, csvData, results,1);
         }
 
-        if(options.containsKey("city")) {
-            List<String[]> results = new ArrayList<String[]> ();
+        if (options.containsKey("city")) {
+            List<String[]> results = new ArrayList<String[]>();
 
-            for(int i = 0; i < csvData.size(); i++) {
-                if(csvData.get(i)[4].equals(options.get("city"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = extracted2(options, csvData, results,4);;
         }
 
-        if(options.containsKey("state")) {
-            List<String[]> results = new ArrayList<String[]> ();
-
-            for(int i = 0; i < csvData.size(); i++) {
-                if(csvData.get(i)[5].equals(options.get("state"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+        if (options.containsKey("state")) {
+            List<String[]> results = new ArrayList<String[]>();
+            csvData = extracted2(options, csvData, results,5);
         }
 
-        if(options.containsKey("round")) {
-            List<String[]> results = new ArrayList<String[]> ();
+        if (options.containsKey("round")) {
+            List<String[]> results = new ArrayList<String[]>();
 
-            for(int i = 0; i < csvData.size(); i++) {
-                if(csvData.get(i)[9].equals(options.get("round"))) {
-                    results.add(csvData.get(i));
-                }
-            }
-            csvData = results;
+            csvData = extracted2(options, csvData, results,9);
         }
 
         List<Map<String, String>> output = new ArrayList<Map<String, String>>();
-        for(int i = 0; i < csvData.size(); i++) {
-            Map<String, String> mapped = new HashMap<String, String> ();
+        for (int i = 0; i < csvData.size(); i++) {
+            Map<String, String> mapped = new HashMap<String, String>();
             extracted(csvData, mapped, i);
             output.add(mapped);
         }
 
         return output;
+    }
+
+    private static List<String[]> extracted2(Map<String, String> options, List<String[]> csvData,
+            List<String[]> results,int h) {
+        for (int i = 0; i < csvData.size(); i++) {
+            if (csvData.get(i)[h].equals(options.get(stringKeys[h]))) {
+                results.add(csvData.get(i));
+            }
+        }
+        csvData = results;
+        return csvData;
     }
 
     public static Map<String, String> findBy(Map<String, String> options) throws IOException, NoSuchEntryException {
