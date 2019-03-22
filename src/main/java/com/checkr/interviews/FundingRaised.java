@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class FundingRaised {
 
-    static String stringKeys[]= {"","company_name","","","city","state","","","","round"};
+    static String stringKeys[]= {"permalink","company_name","number_employees","category","city","state","funded_date","raised_amount","raised_currency","round"};
 
     public static List<Map<String, String>> where(Map<String, String> options) throws IOException {
         List<String[]> csvData = new ArrayList<String[]>();
@@ -20,24 +20,24 @@ public class FundingRaised {
         reader.close();
         csvData.remove(0);
 
-        if(options.containsKey("company_name")) {
+        if(options.containsKey(stringKeys[1])) {
             List<String[]> results = new ArrayList<String[]> ();
 
             csvData = extracted2(options, csvData, results,1);
         }
 
-        if (options.containsKey("city")) {
+        if (options.containsKey(stringKeys[4])) {
             List<String[]> results = new ArrayList<String[]>();
 
             csvData = extracted2(options, csvData, results,4);;
         }
 
-        if (options.containsKey("state")) {
+        if (options.containsKey(stringKeys[5])) {
             List<String[]> results = new ArrayList<String[]>();
             csvData = extracted2(options, csvData, results,5);
         }
 
-        if (options.containsKey("round")) {
+        if (options.containsKey(stringKeys[9])) {
             List<String[]> results = new ArrayList<String[]>();
 
             csvData = extracted2(options, csvData, results,9);
@@ -78,32 +78,32 @@ public class FundingRaised {
         Map<String, String> mapped = new HashMap<String, String>();
 
         for (int i = 0; i < csvData.size(); i++) {
-            if (options.containsKey("company_name")) {
-                if (csvData.get(i)[1].equals(options.get("company_name"))) {
+            if (options.containsKey(stringKeys[1])) {
+                if (csvData.get(i)[1].equals(options.get(stringKeys[1]))) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
                 }
             }
 
-            if (options.containsKey("city")) {
-                if (csvData.get(i)[4].equals(options.get("city"))) {
+            if (options.containsKey(stringKeys[4])) {
+                if (csvData.get(i)[4].equals(options.get(stringKeys[4]))) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
                 }
             }
 
-            if (options.containsKey("state")) {
-                if (csvData.get(i)[5].equals(options.get("state"))) {
+            if (options.containsKey(stringKeys[5])) {
+                if (csvData.get(i)[5].equals(options.get(stringKeys[5]))) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
                 }
             }
 
-            if (options.containsKey("round")) {
-                if (csvData.get(i)[9].equals(options.get("round"))) {
+            if (options.containsKey(stringKeys[9])) {
+                if (csvData.get(i)[9].equals(options.get(stringKeys[9]))) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
@@ -117,16 +117,16 @@ public class FundingRaised {
     }
 
     private static void extracted(List<String[]> csvData, Map<String, String> mapped, int i) {
-        mapped.put("permalink", csvData.get(i)[0]);
-        mapped.put("company_name", csvData.get(i)[1]);
-        mapped.put("number_employees", csvData.get(i)[2]);
-        mapped.put("category", csvData.get(i)[3]);
-        mapped.put("city", csvData.get(i)[4]);
-        mapped.put("state", csvData.get(i)[5]);
-        mapped.put("funded_date", csvData.get(i)[6]);
-        mapped.put("raised_amount", csvData.get(i)[7]);
-        mapped.put("raised_currency", csvData.get(i)[8]);
-        mapped.put("round", csvData.get(i)[9]);
+        mapped.put(stringKeys[0], csvData.get(i)[0]);
+        mapped.put(stringKeys[1], csvData.get(i)[1]);
+        mapped.put(stringKeys[2], csvData.get(i)[2]);
+        mapped.put(stringKeys[3], csvData.get(i)[3]);
+        mapped.put(stringKeys[4], csvData.get(i)[4]);
+        mapped.put(stringKeys[5], csvData.get(i)[5]);
+        mapped.put(stringKeys[6], csvData.get(i)[6]);
+        mapped.put(stringKeys[7], csvData.get(i)[7]);
+        mapped.put(stringKeys[8], csvData.get(i)[8]);
+        mapped.put(stringKeys[9], csvData.get(i)[9]);
     }
 
     public static void main(String[] args) {
