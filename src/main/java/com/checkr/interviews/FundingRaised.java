@@ -79,7 +79,7 @@ public class FundingRaised {
 
         for (int i = 0; i < csvData.size(); i++) {
             if (options.containsKey(stringKeys[1])) {
-                if (csvData.get(i)[1].equals(options.get(stringKeys[1]))) {
+                if (isEqual(options, csvData, i,1)) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
@@ -87,7 +87,7 @@ public class FundingRaised {
             }
 
             if (options.containsKey(stringKeys[4])) {
-                if (csvData.get(i)[4].equals(options.get(stringKeys[4]))) {
+                if (isEqual(options, csvData, i,4)) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
@@ -95,7 +95,7 @@ public class FundingRaised {
             }
 
             if (options.containsKey(stringKeys[5])) {
-                if (csvData.get(i)[5].equals(options.get(stringKeys[5]))) {
+                if (isEqual(options, csvData, i,5)) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
@@ -103,7 +103,7 @@ public class FundingRaised {
             }
 
             if (options.containsKey(stringKeys[9])) {
-                if (csvData.get(i)[9].equals(options.get(stringKeys[9]))) {
+                if (isEqual(options, csvData, i,9)) {
                     extracted(csvData, mapped, i);
                 } else {
                     continue;
@@ -114,6 +114,10 @@ public class FundingRaised {
         }
 
         throw new NoSuchEntryException();
+    }
+
+    private static boolean isEqual(Map<String, String> options, List<String[]> csvData, int i, int h) {
+        return csvData.get(i)[h].equals(options.get(stringKeys[h]));
     }
 
     private static void extracted(List<String[]> csvData, Map<String, String> mapped, int i) {
