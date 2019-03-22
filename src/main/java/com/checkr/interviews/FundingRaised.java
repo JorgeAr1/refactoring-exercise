@@ -23,37 +23,37 @@ public class FundingRaised {
         if(options.containsKey(stringKeys[1])) {
             List<String[]> results = new ArrayList<String[]> ();
 
-            csvData = extracted2(options, csvData, results,1);
+            csvData = asignCSV(options, csvData, results,1);
         }
 
         if (options.containsKey(stringKeys[4])) {
             List<String[]> results = new ArrayList<String[]>();
 
-            csvData = extracted2(options, csvData, results,4);;
+            csvData = asignCSV(options, csvData, results,4);;
         }
 
         if (options.containsKey(stringKeys[5])) {
             List<String[]> results = new ArrayList<String[]>();
-            csvData = extracted2(options, csvData, results,5);
+            csvData = asignCSV(options, csvData, results,5);
         }
 
         if (options.containsKey(stringKeys[9])) {
             List<String[]> results = new ArrayList<String[]>();
 
-            csvData = extracted2(options, csvData, results,9);
+            csvData = asignCSV(options, csvData, results,9);
         }
 
         List<Map<String, String>> output = new ArrayList<Map<String, String>>();
         for (int i = 0; i < csvData.size(); i++) {
             Map<String, String> mapped = new HashMap<String, String>();
-            extracted(csvData, mapped, i);
+            extractArrayData(csvData, mapped, i);
             output.add(mapped);
         }
 
         return output;
     }
 
-    private static List<String[]> extracted2(Map<String, String> options, List<String[]> csvData,
+    private static List<String[]> asignCSV(Map<String, String> options, List<String[]> csvData,
             List<String[]> results,int h) {
         for (int i = 0; i < csvData.size(); i++) {
             if (csvData.get(i)[h].equals(options.get(stringKeys[h]))) {
@@ -80,7 +80,7 @@ public class FundingRaised {
         for (int i = 0; i < csvData.size(); i++) {
             if (options.containsKey(stringKeys[1])) {
                 if (isEqual(options, csvData, i,1)) {
-                    extracted(csvData, mapped, i);
+                    extractArrayData(csvData, mapped, i);
                 } else {
                     continue;
                 }
@@ -88,7 +88,7 @@ public class FundingRaised {
 
             if (options.containsKey(stringKeys[4])) {
                 if (isEqual(options, csvData, i,4)) {
-                    extracted(csvData, mapped, i);
+                    extractArrayData(csvData, mapped, i);
                 } else {
                     continue;
                 }
@@ -96,7 +96,7 @@ public class FundingRaised {
 
             if (options.containsKey(stringKeys[5])) {
                 if (isEqual(options, csvData, i,5)) {
-                    extracted(csvData, mapped, i);
+                    extractArrayData(csvData, mapped, i);
                 } else {
                     continue;
                 }
@@ -104,7 +104,7 @@ public class FundingRaised {
 
             if (options.containsKey(stringKeys[9])) {
                 if (isEqual(options, csvData, i,9)) {
-                    extracted(csvData, mapped, i);
+                    extractArrayData(csvData, mapped, i);
                 } else {
                     continue;
                 }
@@ -120,7 +120,7 @@ public class FundingRaised {
         return csvData.get(i)[h].equals(options.get(stringKeys[h]));
     }
 
-    private static void extracted(List<String[]> csvData, Map<String, String> mapped, int i) {
+    private static void extractArrayData(List<String[]> csvData, Map<String, String> mapped, int i) {
         for(int t=0 ; t<10 ; t++){
             mapped.put(stringKeys[t], csvData.get(i)[t]);
         }
